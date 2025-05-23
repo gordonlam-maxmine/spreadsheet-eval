@@ -152,7 +152,7 @@ export default function Grid(props: GridProps) {
         data={data}
         colWidths={Array(headers.length).fill(150)}
         colHeaders={headers}
-        columnSorting={true}
+        multiColumnSorting={true}
         contextMenu={true}
         manualColumnMove={true}
         manualColumnResize={true}
