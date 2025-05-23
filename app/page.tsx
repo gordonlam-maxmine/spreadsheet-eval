@@ -6,7 +6,14 @@ export default function Home() {
     {
       name: 'Handsontable',
       url: '/handsontable',
-      docs: 'https://handsontable.com/docs/react-data-grid'
+    },
+    {
+      name: 'AG Grid',
+      url: '/aggrid',
+    },
+    {
+      name: 'Syncfusion',
+      url: '/syncfusion',
     },
     // Add more libraries here as they're implemented
   ];
@@ -25,14 +32,7 @@ export default function Home() {
                 >
                   View Demo
                 </Link>
-                <a 
-                  href={library.docs} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded text-center transition-colors"
-                >
-                  Their Documentation
-                </a>
+               
               </div>
             </div>
           </div>
