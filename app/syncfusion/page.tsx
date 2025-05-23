@@ -10,7 +10,6 @@ export default function Home() {
   const spreadsheetRef = React.useRef(null);
 
   React.useEffect(() => {
-    // Fetch and parse CSV data on component mount
     fetchCsvData();
   }, []);
 
@@ -24,15 +23,12 @@ export default function Home() {
         return response.text();
       })
       .then(csvText => {
-        // Parse CSV text into structured data
         const rows = csvText.split('\n');
         if (rows.length > 0) {
-          // Extract headers from first row
           const headers = rows[0].split(',').map(header => header.trim());
           
-          // Parse data rows
           const parsedData = rows.slice(1).map(row => {
-            if (!row.trim()) return null; // Skip empty rows
+            if (!row.trim()) return null;
             
             const values = row.split(',');
             const rowData: {[key: string]: string} = {};
@@ -42,7 +38,7 @@ export default function Home() {
             });
             
             return rowData;
-          }).filter(row => row !== null);
+          }).filter(Boolean);
           
           setCsvData(parsedData);
         }

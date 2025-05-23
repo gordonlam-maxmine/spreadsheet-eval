@@ -4,15 +4,15 @@ import Link from 'next/link';
 export default function Home() {
   const libraries = [
     {
-      name: 'Handsontable',
+      name: 'Handsontable - Best one so far',
       url: '/handsontable',
     },
     {
-      name: 'AG Grid',
-      url: '/aggrid',
+      name: 'AG Grid - Okay',
+      url: '/aggrid', 
     },
     {
-      name: 'Syncfusion',
+      name: 'Syncfusion - Slightly hard to use',
       url: '/syncfusion',
     },
     // Add more libraries here as they're implemented
