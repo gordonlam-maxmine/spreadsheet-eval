@@ -150,9 +150,12 @@ export default function Grid(props: GridProps) {
     <div className="h-full w-full flex-1">
       <HotTable
         data={data}
-        colWidths={Array(headers.length).fill(200)}
+        colWidths={Array(headers.length).fill(150)}
         colHeaders={headers}
+        columnSorting={true}
         contextMenu={true}
+        manualColumnMove={true}
+        manualColumnResize={true}
         filters={true}
         // enable the column menu, but display only the filter menu items
         dropdownMenu={[

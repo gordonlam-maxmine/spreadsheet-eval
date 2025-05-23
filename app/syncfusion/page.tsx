@@ -3,6 +3,7 @@ import * as React from 'react';
 import { SpreadsheetComponent, SheetsDirective, SheetDirective, RangesDirective, 
          RangeDirective, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-spreadsheet';
 import '@syncfusion/ej2-react-spreadsheet/styles/material.css';
+import Link from 'next/link';
 
 export default function Home() {
   const [csvData, setCsvData] = React.useState<any[]>([]);
@@ -62,6 +63,12 @@ export default function Home() {
   return (
     <div className="h-full w-full">
       <h2>Syncfusion Spreadsheet Component</h2>
+      <Link 
+          href="/"
+          className="text-blue-500 hover:text-blue-700 underline"
+        >
+          Back to Home
+        </Link>
       <div style={{ height: '100%', width: '100%' }}>
         <SpreadsheetComponent 
           ref={spreadsheetRef}

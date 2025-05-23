@@ -12,10 +12,13 @@ export default function Home() {
       url: '/aggrid', 
     },
     {
+      name: 'RevoGrid - Okay and lightweight',
+      url: '/revogrid',
+    },
+    {
       name: 'Syncfusion - Slightly hard to use',
       url: '/syncfusion',
     },
-    // Add more libraries here as they're implemented
   ];
 
   return (

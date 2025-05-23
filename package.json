@@ -40,6 +40,8 @@
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
+    "@revolist/react-datagrid": "^4.15.8",
+    "@revolist/revogrid": "^4.15.8",
     "@syncfusion/ej2-react-spreadsheet": "^29.2.5",
     "@types/node": "20.6.2",
     "@types/react": "19.0.3",
