@@ -99,7 +99,10 @@ export default function Grid({ rowData, columnDefs = [] }: GridProps) {
     minWidth: 100,
     sortable: true,
     filter: true, // Basic filter only
-    resizable: true
+    resizable: true,
+    editable: true,
+    undoRedoCellEditing: true,
+    undoRedoCellEditingLimit: 20,
   };
 
   // Grid ready handler
