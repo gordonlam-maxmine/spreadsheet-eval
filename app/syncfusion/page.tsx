@@ -31,10 +31,17 @@ export default function Home() {
   const [loading, setLoading] = React.useState(true);
   const spreadsheetRef = React.useRef<SpreadsheetComponent>(null);
   const [columnTypes, setColumnTypes] = React.useState<{[key: string]: string}>({});
+  const [headers, setHeaders] = React.useState<string[]>([]);
+  const [showColumnList, setShowColumnList] = React.useState(false);
 
   React.useEffect(() => {
     fetchCsvData();
   }, []);
+
+  // Toggle column list visibility
+  const toggleColumnList = () => {
+    setShowColumnList(!showColumnList);
+  };
 
   // Function to determine column types based on headers
   const determineColumnTypes = (headers: string[]) => {
@@ -42,16 +49,14 @@ export default function Home() {
     
     headers.forEach((header) => {
       const headerLower = header.toLowerCase();
-      console.log(headerLower)
+      
       // Detect date/time columns
-      if (headerLower.includes('time') || headerLower == 'source time') {
+      if (headerLower.includes('time')) {
         types[header] = 'datetime';
-         
       } 
       // Add more type detection as needed
       else if (headerLower.includes('date')) {
         types[header] = 'date';
-        
       }
     });
     
@@ -81,10 +86,10 @@ export default function Home() {
       
       if (columnTypes[header] === 'datetime') {
         // Apply datetime format (dd/MM/yyyy hh:mm)
-        spreadsheet.numberFormat('dd/MM hh:mm', columnRange);
+        spreadsheet.numberFormat('dd/MM/yyyy hh:mm', columnRange);
       } else if (columnTypes[header] === 'date') {
         // Apply date format to date columns
-        spreadsheet.numberFormat('dd/MM', columnRange);
+        spreadsheet.numberFormat('dd/MM/yyyy', columnRange);
       }
     });
   };
@@ -141,6 +146,7 @@ export default function Home() {
         const rows = csvText.split('\n');
         if (rows.length > 0) {
           const headers = rows[0].split(',').map(header => header.trim());
+          setHeaders(headers);
           
           // Determine column types based on headers
           determineColumnTypes(headers);
@@ -180,13 +186,40 @@ export default function Home() {
   return (
     <div className="h-full w-full p-4">
       <h2 className="text-2xl font-bold mb-4">Syncfusion Spreadsheet with Custom Styling</h2>
-      <Link 
+      <div className="flex justify-between items-center mb-4">
+        <Link 
           href="/"
-          className="text-blue-500 hover:text-blue-700 underline mb-4 inline-block"
+          className="text-blue-500 hover:text-blue-700 underline inline-block"
         >
           Back to Home
         </Link>
-      <div style={{ height: 'calc(100vh - 120px)', width: '100%', marginTop: '16px' }}>
+        <button 
+          onClick={toggleColumnList}
+          className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded"
+        >
+          {showColumnList ? 'Hide Column Order' : 'Show Column Order'}
+        </button>
+      </div>
+      
+      {showColumnList && (
+        <div className="mb-4 p-4 bg-gray-100 rounded-lg shadow">
+          <h3 className="font-bold mb-2">Default Column Order:</h3>
+          <ol className="list-decimal pl-6">
+            {headers.map((header, index) => (
+              <li key={index} className="mb-1">
+                <span className="font-medium">{header}</span>
+                {columnTypes[header] && (
+                  <span className="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                    {columnTypes[header]}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+      
+      <div style={{ height: 'calc(100vh - 160px)', width: '100%', marginTop: '16px' }}>
         <SpreadsheetComponent 
           ref={spreadsheetRef}
           showSheetTabs={false}
